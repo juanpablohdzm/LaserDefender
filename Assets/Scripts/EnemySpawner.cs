@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
 
@@ -8,7 +6,14 @@ public class EnemySpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Instantiate(EnemyPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+       
+
+        foreach(Transform child in transform)
+        {
+            GameObject EnemyClone = Instantiate(EnemyPrefab, child.position, Quaternion.identity);
+            EnemyClone.transform.parent = child;
+        }
+        
 	}
 	
 	// Update is called once per frame
