@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50337871299578150}
   - component: {fileID: 61641250128688754}
   - component: {fileID: 114448895639534584}
+  - component: {fileID: 95455973002222648}
   m_Layer: 9
   m_Name: enemyGreen
   m_TagString: Untagged
@@ -88,6 +89,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.93, y: 0.84}
   m_EdgeRadius: 0
+--- !u!95 &95455973002222648
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1617395844169282}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c333eaade22368b4c83c90be8f5d43e8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114448895639534584
 MonoBehaviour:
   m_ObjectHideFlags: 1
