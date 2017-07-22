@@ -2,8 +2,12 @@
 
 public class PlayerController_CS : MonoBehaviour {
 
-    public float Speed=5f;
+    public float PlayerSpeed=5f;
     public float ShipWidth = .5f;
+    public float LaserPosition_Y = .7f;
+    public GameObject Laser;
+    public float LaserSpeed = 5f;
+    public float LaserFireRate = .2f;
 
     float minX;
     float maxX;
@@ -27,17 +31,34 @@ public class PlayerController_CS : MonoBehaviour {
 
         float NewX = Mathf.Clamp(transform.position.x, minX, maxX);
         transform.position = new Vector3(NewX, transform.position.y);
-        
-	}
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            InvokeRepeating("Fire", 0.0001f, LaserFireRate);
+        if (Input.GetKeyUp(KeyCode.Space))
+            CancelInvoke("Fire");
+
+
+    }
 
     void MoveToLeft()
     {
 
-        transform.position += Vector3.left * Speed * Time.deltaTime;
+        transform.position += Vector3.left * PlayerSpeed * Time.deltaTime;
     }
 
     void MoveToRight()
     {
-        transform.position += Vector3.right * Speed * Time.deltaTime;
+        
+        transform.position += Vector3.right * PlayerSpeed * Time.deltaTime;
+    }
+
+    void Fire()
+    {
+        Vector3 LaserPosition = transform.position + new Vector3(0, LaserPosition_Y, 0);
+        GameObject LaserClone= Instantiate(Laser, LaserPosition, Quaternion.identity);
+        LaserClone.GetComponent<Rigidbody2D>().velocity = new Vector2(0, LaserSpeed);
+        LaserClone.GetComponent<Rigidbody2D>().gravityScale = 0;
+
+
     }
 }
