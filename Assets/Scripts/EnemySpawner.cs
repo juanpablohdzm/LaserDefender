@@ -5,7 +5,8 @@ public class EnemySpawner : MonoBehaviour {
     public GameObject EnemyPrefab;
     public float Width = 10f;
     public float Height = 10f;
-    public float Speed = 5;
+    public float Speed = 5f;
+    public float SpawnDelay = .5f;
 
     private float MinX;
     private float MaxX;
@@ -15,11 +16,7 @@ public class EnemySpawner : MonoBehaviour {
 	void Start () {
 
         GetScreenBounds();
-        foreach(Transform child in transform)
-        {
-            GameObject EnemyClone = Instantiate(EnemyPrefab, child.position, Quaternion.identity);
-            EnemyClone.transform.parent = child;
-        }
+        SpawnUntilFull();
         
 	}
 
@@ -31,12 +28,18 @@ public class EnemySpawner : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        //Check for formation going outside of screen
         if (transform.position.x - .5f * Width <= MinX)
             HasHit = false;
         else
             if (transform.position.x + .5f * Width >= MaxX)
             HasHit = true;
         Move();
+
+        if(AllMembersDead())
+        {
+            SpawnUntilFull();
+        }
 
 	}
 
@@ -47,7 +50,48 @@ public class EnemySpawner : MonoBehaviour {
         else
             transform.position +=Vector3.right*Speed * Time.deltaTime;
     }
+
+
+    void SpawnUntilFull()
+    {
+        Transform FreePosition = NextFreePosition();
+        if (FreePosition)
+        {
+            SpawnEnemies(FreePosition);
+            Invoke("SpawnUntilFull", SpawnDelay);
+        }
+        
+    }
+
+    Transform NextFreePosition()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).childCount == 0)
+                return transform.GetChild(i).transform;
+        }
+        return null;
+    }
+
+    void SpawnEnemies(Transform child)
+    {
+
+        GameObject EnemyClone = Instantiate(EnemyPrefab, child.position, Quaternion.identity);
+        EnemyClone.transform.parent = child;
+
+
+    }
+
    
+
+    bool AllMembersDead()
+    {
+        EnemyBehaviour[] Children = FindObjectsOfType<EnemyBehaviour>();
+        if (Children.Length == 0)
+            return true;
+        else
+            return false;
+    }
 
     void GetScreenBounds()
     {
