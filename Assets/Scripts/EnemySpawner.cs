@@ -31,9 +31,11 @@ public class EnemySpawner : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (transform.position.x -.5f*Width < MinX || transform.position.x + .5f * Width > MaxX)
-            HasHit = !HasHit;
-        
+        if (transform.position.x - .5f * Width <= MinX)
+            HasHit = false;
+        else
+            if (transform.position.x + .5f * Width >= MaxX)
+            HasHit = true;
         Move();
 
 	}
@@ -41,7 +43,7 @@ public class EnemySpawner : MonoBehaviour {
     void Move()
     {
         if (HasHit)
-        transform.position += Vector3.left*Speed * Time.deltaTime ;
+            transform.position += Vector3.left*Speed * Time.deltaTime ;
         else
             transform.position +=Vector3.right*Speed * Time.deltaTime;
     }
