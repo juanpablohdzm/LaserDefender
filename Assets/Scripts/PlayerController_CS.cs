@@ -2,6 +2,7 @@
 
 public class PlayerController_CS : MonoBehaviour {
 
+    public float Health = 300f;
     public float PlayerSpeed=5f;
     public float ShipWidth = .5f;
     public float LaserPosition_Y = .7f;
@@ -60,5 +61,16 @@ public class PlayerController_CS : MonoBehaviour {
         LaserClone.GetComponent<Rigidbody2D>().gravityScale = 0;
 
 
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Projectile Laser = collision.gameObject.GetComponent<Projectile>();
+        if (Laser != null)
+        {
+            Health -= Laser.GetDamage();
+            Laser.Hit();
+        }
+        if (Health <= 0)
+            Destroy(gameObject);
     }
 }

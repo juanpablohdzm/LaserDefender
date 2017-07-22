@@ -100,6 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 300
+  LaserPosition_Y: -0.7
+  Laser: {fileID: 1250724562037926, guid: a3c1608bcdd01ca4189b6a7f037deae5, type: 2}
+  LaserSpeed: 5
+  LaserFireRate: 0.5
 --- !u!212 &212762615511079222
 SpriteRenderer:
   m_ObjectHideFlags: 1
