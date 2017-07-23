@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController_CS : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class PlayerController_CS : MonoBehaviour {
     public GameObject Laser;
     public float LaserSpeed = 5f;
     public float LaserFireRate = .2f;
+    public Text HealthText;
 
     float minX;
     float maxX;
@@ -21,6 +23,8 @@ public class PlayerController_CS : MonoBehaviour {
         Vector3 WorldRightPos = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, Distance));
         minX = WorldLeftPos.x+ShipWidth;
         maxX = WorldRightPos.x-ShipWidth;
+
+        HealthText.text = "Health: " + Health;
     }
 
     // Update is called once per frame
@@ -69,6 +73,7 @@ public class PlayerController_CS : MonoBehaviour {
         if (Laser != null)
         {
             Health -= Laser.GetDamage();
+            HealthText.text = "Health: " + Health;
             Laser.Hit();
         }
         if (Health <= 0)
