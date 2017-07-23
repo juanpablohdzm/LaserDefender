@@ -7,8 +7,17 @@ public class EnemyBehaviour : MonoBehaviour
     public GameObject Laser;
     public float LaserSpeed = 5f;
     public float LaserFireRate = .5f;
+    public float ScoreValue = 150f;
 
-   
+
+    private ScoreKeeper Score;
+
+
+    private void Start()
+    {
+        Score = GameObject.FindObjectOfType<ScoreKeeper>();
+    }
+
 
     private void Update()
     {
@@ -26,7 +35,11 @@ public class EnemyBehaviour : MonoBehaviour
             Laser.Hit();
         }
         if (Health <= 0)
+        {
             Destroy(gameObject);
+            Score.SetScore(ScoreValue);
+
+        }
     }
 
     void Fire()
