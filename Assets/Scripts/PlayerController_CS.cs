@@ -59,6 +59,7 @@ public class PlayerController_CS : MonoBehaviour {
         GameObject LaserClone= Instantiate(Laser, LaserPosition, Quaternion.identity);
         LaserClone.GetComponent<Rigidbody2D>().velocity = new Vector2(0, LaserSpeed);
         LaserClone.GetComponent<Rigidbody2D>().gravityScale = 0;
+        GetComponent<AudioSource>().Play();
 
 
     }

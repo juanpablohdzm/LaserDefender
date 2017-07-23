@@ -8,6 +8,7 @@ public class EnemyBehaviour : MonoBehaviour
     public float LaserSpeed = 5f;
     public float LaserFireRate = .5f;
     public float ScoreValue = 150f;
+    public AudioClip DestroySound;
 
 
     private ScoreKeeper Score;
@@ -38,6 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             Destroy(gameObject);
             Score.SetScore(ScoreValue);
+            AudioSource.PlayClipAtPoint(DestroySound, transform.position,1f);
 
         }
     }
@@ -48,6 +50,7 @@ public class EnemyBehaviour : MonoBehaviour
         GameObject LaserClone = Instantiate(Laser, LaserPosition, Quaternion.identity);
         LaserClone.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -LaserSpeed);
         LaserClone.GetComponent<Rigidbody2D>().gravityScale = 0;
+        GetComponent<AudioSource>().Play();
 
 
     }
