@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class ScoreKeeper : MonoBehaviour
 {
-    private Text text;
-    private float score=0;
+    public Text text;
+    public static float score=0;
     private void Start()
     {
-         text = GameObject.FindObjectOfType<Text>();
-         Reset();
+
+        ResetScore();
     }
 
 
@@ -17,10 +17,9 @@ public class ScoreKeeper : MonoBehaviour
         score += points;
         text.text = "Score: " + score;
     }
-    private void Reset()
+    public static void ResetScore()
     {
         score = 0;
-        text.text = "Score: 0";
     }
 
 }

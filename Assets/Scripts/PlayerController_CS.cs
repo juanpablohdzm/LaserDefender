@@ -72,6 +72,9 @@ public class PlayerController_CS : MonoBehaviour {
             Laser.Hit();
         }
         if (Health <= 0)
+        {
             Destroy(gameObject);
+            GameObject.FindObjectOfType<LevelManager>().LoadLevel("Win Screen");
+        }
     }
 }
